@@ -1,38 +1,33 @@
-#include "../lib_files/Simple_window.h"
-#include "../lib_files/Graph.h"
-
-int main()
-{
+#include "Simple_window.h"
+#include "Graph.h"
 using namespace Graph_lib;
 
-try {
-	Simple_window win {Point{100,100},600,400,"Canvas"};
-	
-	win.wait_for_button();
-	
-	Rectangle rect {Point{100,100},80,40};
-	
-	rect.set_color(Color::blue);
-	win.attach(rect);
-	win.set_label("Canvas 1");
-	win.wait_for_button();
-	
-	Polygon poly;
-	
-	poly.add(Point{200,100});
-	poly.add(Point{280,100});
-	poly.add(Point{280,140});
-	poly.add(Point{200,140});
-	
-	poly.set_color(Color::red);
-	win.attach(poly);
-	win.set_label("Canvas 2");
-	win.wait_for_button();
+int main()
+try
+{
+Point tl(100, 100);
+Simple_window win(tl, 600, 400, "Canvas");
+
+Graph_lib::Rectangle rect(Point(100,150),150,100);
+rect.set_color(Color::blue);
+
+Graph_lib::Polygon poly;
+poly.add(Point(350, 150));
+poly.add(Point(500, 150));
+poly.add(Point(500, 250));
+poly.add(Point(350, 250));
+poly.set_color(Color::red);
+
+win.attach(rect);
+win.attach(poly);
+
+win.wait_for_button();
 }
-catch(exception& e){
-cerr << "Exception: " << e.what() << '\n';
+catch (exception& e) {
+cout << e.what() << endl;
+return 1;
 }
-catch(...){
-cerr << "Valami hiba tortent" << '\n';
-}
+catch (…) {
+cout << "Exiting" << endl;
+return 2;
 }
